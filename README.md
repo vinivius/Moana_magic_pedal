@@ -26,7 +26,7 @@ This hardware modification project transforms the innocent Disney toy into a pow
 
 - **🌊 Universal TV Remote** - Cycles through comprehensive IR codes to turn off most TVs (because the ocean controls all screens now!)
 - **🐠 Bluetooth LE Spam** - Floods nearby devices with fake Apple AirPods, Samsung Galaxy Buds, and Android Fast Pair notifications
-- **🌴 Magical LED Effects** - RGB LEDs provide visual feedback and enchanting animations worthy of Te Fiti herself
+- **🌴 Magical LED Effects** - Uses the toy's original LEDs for visual feedback and enchanting animations worthy of Te Fiti herself
 - **⚓ Dual Operation Modes** - Switch between prank mode and OTA update mode
 
 Perfect for when your little Moana fan wants to demonstrate that she really CAN command the digital seas! Also great for harmless pranks, tech demonstrations, or educational purposes. 🐙
@@ -48,12 +48,12 @@ Perfect for when your little Moana fan wants to demonstrate that she really CAN 
 - **Short Press** (< 3 seconds): Runs for 10 seconds automatically
 - **Long Press** (≥ 3 seconds): Runs continuously while button is held
 - **Mode Switch**: Toggle between Prank Mode and Demo/OTA Mode
-- **RGB LED Feedback**: Visual indicators for operation status (glows like the heart of Te Fiti!)
+- **Original LED Feedback**: Uses the toy's existing LEDs for visual indicators (glows like the heart of Te Fiti!)
 
 ### ⚓ Technical Features (Maui's Hook Engineering)
 - **Over-The-Air Updates**: Wireless firmware updates via custom WiFi AP
 - **Watchdog Protection**: Hardware watchdog prevents system lockups
-- **Optimized Performance**: Hardware PWM for LEDs, efficient memory usage
+- **Optimized Performance**: Hardware PWM for original toy LEDs, efficient memory usage
 - **Dual Core Utilization**: Leverages ESP32-C3's capabilities
 
 ## 🐠 Hardware
@@ -61,23 +61,24 @@ Perfect for when your little Moana fan wants to demonstrate that she really CAN 
 ### Core Components (Ingredients for Real Magic! 🍲)
 - **[ESP32-C3 Super Mini](https://www.aliexpress.us/item/3256806718210846.html)** - Main microcontroller (the new heart of Te Fiti!)
 - **[IR LED](https://amzn.to/4eyGV2R)** - 940nm infrared transmitter (Te Ka's fire power!)
-- **[Original Moana's Magical Oar](https://amzn.to/4lgTWke)** - Modified Disney toy host platform (Pua approved! 🐷)
+- **[Original Moana's Magical Oar](https://amzn.to/4lgTWke)** - Modified Disney toy host platform with original LEDs, button, and switch (Pua approved! 🐷)
 - **[39Ω Resistor](https://amzn.to/44hQZKd)** - Current limiting for IR LED (CRITICAL for ESP32 protection! ⚠️)
 - **[2x 100kΩ Resistors](https://amzn.to/44hQZKd)** - Voltage divider for mode switch (REQUIRED to prevent damage! ⚠️)
+- **[10kΩ Resistor](https://amzn.to/44hQZKd)** - Pulldown resistor for push button (REQUIRED for reliable operation! ⚠️)
 
 ### Pin Configuration
 ```
 GPIO 2  - IR LED (Transmitter) + 39Ω current limiting resistor
-GPIO 3  - Push Button (Active High)
-GPIO 4  - LED 2 (Green)
-GPIO 5  - LED 3 (Blue) 
-GPIO 6  - LED 1 (Red)
-GPIO 7  - Mode Switch (through 100kΩ voltage divider!)
+GPIO 3  - Push Button (Original toy button with 10kΩ pulldown resistor)
+GPIO 4  - LED 2 (Green) - Original toy LED
+GPIO 5  - LED 3 (Blue) - Original toy LED
+GPIO 6  - LED 1 (Red) - Original toy LED
+GPIO 7  - Mode Switch (Original toy switch through 100kΩ voltage divider!)
 GPIO 8  - Debug LED
 
 ESP32-C3 Power Connections:
 5V    - Connect to VBAT from original PCB
-3.3V  - Power source for LEDs (after removing original VBAT resistor)
+3.3V  - Power source for original toy LEDs (after removing original VBAT resistor)
 GND   - Common ground
 ```
 
@@ -88,7 +89,7 @@ GND   - Common ground
 1. **Power Connection**: 
    - Connect original PCB's **VBAT** to ESP32-C3 **5V input**
    - **REMOVE** the resistor connecting VBAT to buttons/LEDs on original PCB
-   - Use ESP32-C3's **3.3V output** to power the LEDs
+   - Use ESP32-C3's **3.3V output** to power the original toy LEDs
 
 2. **Mode Switch Voltage Divider** (MANDATORY! 🚨):
    - Add **two 100kΩ resistors** in series as voltage divider
@@ -99,6 +100,11 @@ GND   - Common ground
    - Add **39Ω resistor** in series with IR LED
    - Protects both LED and ESP32-C3 GPIO
    - Any similar value (30-50Ω) will work
+
+4. **Push Button Pulldown** (REQUIRED! 🚨):
+   - Add **10kΩ pulldown resistor** from GPIO 3 to GND
+   - Ensures reliable button state detection
+   - Without this, button readings will be unreliable!
 
 ### Original PCB Pinout Reference 🗺️
 ![Original PCB Pinout](./media/originalpcb_pinout.png)
@@ -163,12 +169,11 @@ This project builds upon several excellent open-source libraries and projects (l
 2. **ESP32-C3 Super Mini development board** - The heart of Te Fiti! 💚
 3. **[Moana's Magical Oar toy](https://amzn.to/4lgTWke)** - The vessel that will receive real magic! 🌊
 4. **[IR LED](https://amzn.to/4eyGV2R)** (940nm recommended) - Your digital fire! 🔥
-5. **RGB LEDs (3x)** and appropriate resistors - For that ocean glow! 🌊
-6. **Push button** and **toggle switch** - The command controls!
-7. **39Ω Resistor** - MANDATORY for IR LED current limiting ⚡
-8. **2x 100kΩ Resistors** - ESSENTIAL voltage divider (prevents ESP32-C3 damage!) 🚨
-9. **Soldering equipment** and multimeter for testing
-10. **Original PCB pinout reference** (see Project Gallery above!)
+5. **39Ω Resistor** - MANDATORY for IR LED current limiting ⚡
+6. **2x 100kΩ Resistors** - ESSENTIAL voltage divider (prevents ESP32-C3 damage!) 🚨
+7. **10kΩ Resistor** - REQUIRED pulldown for push button (ensures reliable operation!) ⚡
+8. **Soldering equipment** and multimeter for testing
+9. **Original PCB pinout reference** (see Project Gallery above!)
 
 ### Hardware Assembly (The Sacred Ritual! 🌋)
 
@@ -191,7 +196,7 @@ This project builds upon several excellent open-source libraries and projects (l
 
 4. **Power Connections** 🔌:
    - Connect original PCB's **VBAT** → ESP32-C3 **5V**
-   - Connect ESP32-C3 **3.3V** → LED power (where old VBAT resistor was)
+   - Connect ESP32-C3 **3.3V** → Original toy LED power (where old VBAT resistor was)
    - Connect **GND** pins together
 
 5. **Install IR LED** 🔥:
@@ -199,13 +204,13 @@ This project builds upon several excellent open-source libraries and projects (l
    - Connect to GPIO 2 through the resistor
    - Without resistor = dead ESP32-C3!
 
-6. **Connect RGB LEDs** 🌈:
-   - Wire LEDs to GPIO 4, 5, 6 (with appropriate current limiting resistors)
+6. **Connect Original LEDs** 🌈:
+   - Wire toy's original LEDs to GPIO 4, 5, 6 (preserving original current limiting resistors)
    - Power from ESP32-C3's 3.3V output, NOT original VBAT
 
-7. **Wire Controls** 🎮:
-   - Button: Connect to GPIO 3 (active high with pulldown)
-   - Mode Switch: Connect through voltage divider to GPIO 7
+7. **Wire Original Controls** 🎮:
+   - Button: Connect original toy button to GPIO 3 with 10kΩ pulldown resistor to GND
+   - Mode Switch: Connect original toy switch through voltage divider to GPIO 7
 
 8. **Final Testing** 🧪:
    - Double-check all connections against pinout diagram
