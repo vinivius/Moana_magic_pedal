@@ -2,7 +2,7 @@
 
 > **When your 5-year-old wants REAL magic!** - We took Moana's Magical Oar toy and made it *actually* magical by adding the power to turn off TVs and flood nearby devices with fake Bluetooth notifications. Because if the ocean chose you, you deserve proper pranking powers! 🐚✨
 
-![Demo Video](./media/demo_of_it_running.mp4)
+[![🌊 Watch the Magic in Action!](https://img.youtube.com/vi/QWM0_4KHsHc/maxresdefault.jpg)](https://youtube.com/shorts/QWM0_4KHsHc)
 
 ## 📋 Table of Contents
 
@@ -133,7 +133,7 @@ GND   - Common ground
 *Complete assembly - now my daughter's oar has REAL magical powers! 🌊✨ (Pua would be proud! 🐷)*
 
 ### Live Demo (See the Magic in Action!) 🥥
-[🌊 **Watch the Ocean's Power Unleashed!**](./media/demo_of_it_running.mp4)
+[![🌊 **Watch the Ocean's Power Unleashed!**](https://img.youtube.com/vi/QWM0_4KHsHc/maxresdefault.jpg)](https://youtube.com/shorts/QWM0_4KHsHc)
 
 ## 🐠 Software Dependencies
 
