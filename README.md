@@ -59,7 +59,7 @@ Perfect for when your little Moana fan wants to demonstrate that she really CAN 
 ## 🐠 Hardware
 
 ### Core Components (Ingredients for Real Magic! 🍲)
-- **[ESP32-C3 Super Mini](https://www.aliexpress.us/item/3256806718210846.html)** - Main microcontroller (the new heart of Te Fiti!)
+- **[ESP32-C3 Super Mini](https://amzn.to/4ezUmzp)** - Main microcontroller (the new heart of Te Fiti!)
 - **[IR LED](https://amzn.to/4eyGV2R)** - 940nm infrared transmitter (Te Ka's fire power!)
 - **[Original Moana's Magical Oar](https://amzn.to/4lgTWke)** - Modified Disney toy host platform with original LEDs, button, and switch (Pua approved! 🐷)
 - **[39Ω Resistor](https://amzn.to/44hQZKd)** - Current limiting for IR LED (CRITICAL for ESP32 protection! ⚠️)
