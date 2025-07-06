@@ -47,7 +47,8 @@ const int SWITCH_PIN = 7;     // GPIO 7 - Safe for input with external pulldown
 const int DEBUG_LED_PIN = 8;  // GPIO 8 - Safe for output, debug LED
 
 // --- IR Transmitter Object ---
-IRsend irsend(IR_LED_PIN);
+// IR LED is active-low, so we want the pin HIGH when idle (off).
+IRsend irsend(IR_LED_PIN, true); // true = active low output
 
 // --- LED PWM Configuration for "Magical Glow" ---
 // We use the ESP32's LEDC (LED Control) peripheral for efficient hardware PWM.
@@ -79,6 +80,7 @@ const IRCommand irCommands[] = {
   // Samsung
   {SAMSUNG, 0xE0E040BF, 32},
   {SAMSUNG, 0xE0E019E6, 32},
+  {SAMSUNG, 0xE0E0E01F, 32}, // Samsung Power Toggle - common alternative
   // LG (NEC)
   {NEC, 0x20DF10EF, 32},
   {NEC, 0x20DF23DC, 32},
@@ -92,6 +94,7 @@ const IRCommand irCommands[] = {
   {RC6, 0x10C, 20},
   // Sharp
   {SHARP, 0xB54A, 15}, // Standard Sharp power code
+  {SHARP, 0xAA5A, 15}, // Sharp Power Toggle - common alternative
   // Toshiba (NEC)
   {NEC, 0x2FD48B7, 32},
   {NEC, 0x2FD807F, 32},
